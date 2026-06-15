@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <map>
 
 using namespace std;
 
@@ -12,13 +13,37 @@ vector<string> separarToken(string token) {
     vector<string> result;
     string armazem = "";
     
-    for(char c: token) {
-        if( c == '(' || c == ')' ) { // Aqui verificamos se encontramos os parentes para casos como "escreva(x)"
-            if( !armazem.empty() == true ) { // Verificamos se tem alguma coisa ja armazenada, para ai resetar "" o armazem
+    // for(char c: token) {
+    //     if( c == '(' || c == ')' ) { // Aqui verificamos se encontramos os parentes para casos como "escreva(x)"
+    //         if( !armazem.empty() == true ) { // Verificamos se tem alguma coisa ja armazenada, para ai resetar "" o armazem
+    //             result.push_back(armazem);
+    //             armazem = "";
+    //         }
+    //         result.push_back(string(1, c)); // Como é um Vector de string, ele nao aceita char, entao convertemos o char para string
+    //     } else {
+    //         armazem += c;
+    //     }
+    // }
+
+    for( size_t i = 0; i < token.size(); i++ ) {
+        char c = token[i];
+
+        if( c == '<' && token[i+1] == '-' ) { // Aqui esta sendo verificado se o token é um '<-'
+            if(!armazem.empty()) {
                 result.push_back(armazem);
                 armazem = "";
             }
-            result.push_back(string(1, c)); // Como é um Vector de string, ele nao aceita char, entao convertemos o char para string
+            result.push_back("<-");
+            i++; // para pular o '-'
+            continue;
+        }
+
+        if( c == '(' || c == ')' || c == '+' || c == '-' || c == '*' || c == '/'  ) {
+            if(!armazem.empty()) {
+                result.push_back(armazem);
+                armazem = "";
+            }
+            result.push_back(string(1, c));
         } else {
             armazem += c;
         }
@@ -29,6 +54,24 @@ vector<string> separarToken(string token) {
     return result;
 
 }
+
+double resolverOperando( string token, map<string, double>& variaveis ) {
+
+    if( variaveis.count(token) == true ) return variaveis[token];
+
+    return stod(token);
+
+}
+
+double aplicarOperador( double value1, double value2, string operador ) {
+    if (operador == "+") return value1 + value2;
+    else if (operador == "-") return value1 - value2;
+    else if (operador == "*") return value1 * value2;
+    else if (operador == "/") return value1 / value2;
+
+    return 0; // Aqui caso nao tenha nenhum desses operadores, ele ira retornar 0, para o codigo nao quebrar!
+}
+
 
 
 int main(int argc, char* argv[]) {
@@ -50,6 +93,7 @@ int main(int argc, char* argv[]) {
         return 0;
     }
 
+    map<string, double> variaveis; // Isso aqui será uma "Tabela de Variáves": nome <- valor
     string linha; // Nessa variável iremos guardar o conteúdo de uma linha inteira usando a função "getline(arquivo, linha)"
 
     // Este laço de repetição irá funcionar da seguinte forma:
@@ -72,6 +116,47 @@ int main(int argc, char* argv[]) {
             for(string t: subTokens) {
                 tokens.push_back(t);
             }
+        }
+
+        if( tokens.size() == 3 && tokens[1] == "<-" ) {
+            string nomeVariavel = tokens[0];
+            double valor = stod(tokens[2]); // Transformando String em Double
+
+            variaveis[nomeVariavel] = valor;
+            cout << "Variavel '" << nomeVariavel << "' recebeu o valor " << valor << endl;
+
+        } else if( tokens.size() == 4 && tokens[0] == "escreva" && tokens[1] == "(" && tokens[3] == ")" ) {
+
+            string nomeVariavel = tokens[2];
+
+            if( variaveis.count(nomeVariavel) == true ) { // o count é nada mais que verificar na tabela se a variavel existe!
+                cout << variaveis[nomeVariavel] << endl;                
+            } else cout << "[ERROR] Variável '" << nomeVariavel << "' nao encontrada!" << endl;
+
+        } else if( tokens.size() == 5 && tokens[1] == "<-" ) {
+
+            string nomeVariavel = tokens[0];
+            string operador = tokens[3];
+
+            double value1 = resolverOperando(tokens[2], variaveis);
+            double value2 = resolverOperando(tokens[4], variaveis);
+            double result = aplicarOperador(value1, value2, operador);
+
+            // if(operador == "+") result = value1 + value2;
+            // else if(operador == "-") result = value1 - value2;
+            // else if(operador == "*") result = value1 * value2;
+            // else if(operador == "/") result = value1 / value2;
+
+            variaveis[nomeVariavel] = result;
+            cout << "Variavel '" << nomeVariavel << "' recebeu o valor " << result << endl;
+
+
+        } else if( tokens.size() == 6 && tokens[0] == "escreva" && tokens[1] == "(" && tokens[5] == ")"  ) {
+            double value1 = resolverOperando(tokens[2], variaveis);
+            double value2 = resolverOperando(tokens[4], variaveis);
+            double result = aplicarOperador(value1, value2, tokens[3]);
+
+            cout << result << endl;
         }
 
         cout << "Tokens: ";
