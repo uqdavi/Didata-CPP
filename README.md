@@ -21,21 +21,37 @@ Saída esperada:
 
 O desenvolvimento será feito de forma incremental, com cada etapa documentando os conceitos da disciplina aplicados ao longo do projeto.
 
-## Versão atual: 1.0.0
+## Versões
 
-Nesta primeira versão, o projeto conta apenas com:
+### v1.1.0 (atual)
+
+Nesta versão, o projeto passou a:
+
+- Branch "develop" no repositório para boas práticas de commits ensinadas pelo professor Marlon nas aulas de Fundamentos da Computação.
+- Ler o arquivo `.txt` linha por linha, usando `getline`.
+- Separar cada linha em **tokens** (pedaços), usando `stringstream` e o operador `>>`.
+- Tratar tokens que contêm parênteses, por exemplo: `escreva(a)` é separado em `escreva`, `(`, `a` e `)` — através da função `separarToken`.
+- Iniciar a modularização do código, com a criação da primeira função fora do `main`.
+
+Novas bibliotecas utilizadas:
+
+- `<sstream>` — permite tratar uma `string` como um stream, possibilitando ler "palavra por palavra" com `>>`. Documentação: https://en.cppreference.com/w/cpp/header/sstream
+- `<vector>` — usado para armazenar os tokens de forma dinâmica. Documentação: https://www-w3schools-com.translate.goog/cpp/cpp_vectors.asp?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=pt&_x_tr_pto=tc
+
+### v1.0.0
 
 - Criação do arquivo principal `main.cpp`.
-- Inclusão da biblioteca `<fstream>`, que será utilizada para leitura de arquivos de texto.
+- Inclusão da biblioteca `<fstream>`, utilizada para leitura de arquivos de texto.
 
-A `<fstream>` faz parte da biblioteca padrão do C++ e fornece as classes responsáveis pela manipulação de arquivos, como `ifstream` (entrada/leitura) e `ofstream` (saída/escrita).
-
-Documentação oficial: https://en.cppreference.com/w/cpp/header/fstream
+Documentação oficial: https://www.w3schools.com/cpp/ref_fstream_fstream.asp
 
 ## Tecnologias
 
 - C++
-- Bibliotecas da STL (Standard Template Library)
+- Bibliotecas da STL (Standard Template Library):
+  - `<fstream>` — leitura de arquivos
+  - `<sstream>` — tokenização de strings
+  - `<vector>` — armazenamento dinâmico dos tokens
 
 ## Status
 
