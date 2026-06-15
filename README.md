@@ -27,7 +27,7 @@ O desenvolvimento será feito de forma incremental, com cada etapa documentando 
 
 Nesta versão, o projeto passou a:
 
-- Branch "develop" no repositório para boas práticas de commits ensinadas pelo professor Marlon nas aulas de Fundamentos da Computação.
+- Branch "develop" no repositório para boas práticas de commits ensinadas pelo professor Marlon nas aulas de Fundamentos da Computação
 - Ler o arquivo `.txt` linha por linha, usando `getline`.
 - Separar cada linha em **tokens** (pedaços), usando `stringstream` e o operador `>>`.
 - Tratar tokens que contêm parênteses, por exemplo: `escreva(a)` é separado em `escreva`, `(`, `a` e `)` — através da função `separarToken`.
