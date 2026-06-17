@@ -1,6 +1,7 @@
 #ifndef INTERPRETADOR_H
 #define INTERPRETADOR_H
 
+// Ja colocamos todos os includes aqui para nao precisar chamar em cada arquivo
 #include <iostream>
 #include <string>
 #include <sstream>

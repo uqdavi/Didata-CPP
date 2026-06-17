@@ -22,7 +22,7 @@ Saída:
 
 O desenvolvimento é feito de forma incremental, com cada etapa documentando os conceitos da disciplina aplicados ao longo do projeto.
 
-## Versão atual: v1.2.0
+## Versão atual: v1.2.1
 
 Atualmente, o Didata CPP já é capaz de interpretar:
 
@@ -31,6 +31,25 @@ Atualmente, o Didata CPP já é capaz de interpretar:
 - Comando `escreva(...)`, tanto para variáveis (`escreva(a)`) quanto para expressões (`escreva(a+b)`)
 
 O histórico completo de versões — com o que foi adicionado e os conceitos aplicados em cada etapa — está disponível na aba [Releases](https://github.com/uqdavi/Didata-CPP/releases) do repositório.
+
+## Estrutura do projeto
+
+```
+Didata-CPP/
+├── src/                  ← módulos do interpretador
+│   ├── tokenizarLinha.cpp
+│   ├── separarTokens.cpp
+│   ├── resolverOperando.cpp
+│   ├── aplicarOperador.cpp
+│   ├── executarLinha.cpp
+│   └── imprimirTokens.cpp
+├── include/              ← cabeçalhos
+│   └── Interpretador.h
+├── main.cpp
+├── Makefile
+├── README.md
+└── .gitignore
+```
 
 ## Tecnologias
 
@@ -41,9 +60,23 @@ O histórico completo de versões — com o que foi adicionado e os conceitos ap
   - `<vector>` — armazenamento dinâmico dos tokens
   - `<map>` — tabela de variáveis (nome → valor)
 
+## Como compilar e executar
+
+```bash
+# Compilar
+make
+
+# Executar
+main programa.txt        # Windows
+./main programa.txt      # Linux/Mac
+
+# Limpar o executável
+make clean
+```
+
 ## Workflow de versionamento
 
-O projeto segue o fluxo de branches `main` (versões oficiais) e `develop` (desenvolvimento), método ensinado pelo professor Marlon na disciplina de Fundamentos da Computação. Cada nova versão é marcada com uma tag (ex: `v1.2.0`) e documentada na seção de Releases.
+O projeto segue o fluxo de branches `main` (versões oficiais) e `develop` (desenvolvimento), método ensinado pelo professor Marlon na disciplina de Fundamentos da Computação. Cada nova versão é marcada com uma tag (ex: `v1.2.1`) e documentada na seção de Releases.
 
 ## Status
 

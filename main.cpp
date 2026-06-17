@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
 
         executarLinha(tokens, variaveis);
 
-        imprimirTokens(tokens);
+        // imprimirTokens(tokens);
     }
 
     arquivo.close();
