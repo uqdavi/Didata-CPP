@@ -18,8 +18,13 @@ double aplicarOperador(double value1, double value2, string operador);
 
 vector<string> tokenizarLinha(string linha);
 
-void executarLinha(vector<string> tokens, map<string, double>& variaveis);
+void executarLinha(vector<string> tokens, map<string, double>& variaveis, int numeroLinha);
 
 void imprimirTokens(vector<string> tokens);
+
+bool atribuicao(vector<string> tokens, map<string, double>& variaveis);
+bool atribuicaoOperacao(vector<string> tokens, map<string, double>& variaveis);
+bool escreva(vector<string> tokens, map<string, double>& variaveis);
+bool escrevaOperacao(vector<string> tokens, map<string, double>& variaveis);
 
 #endif

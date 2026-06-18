@@ -14,7 +14,11 @@ SRCS = main.cpp \
        src/resolverOperando.cpp \
        src/aplicarOperador.cpp \
        src/executarLinha.cpp \
-       src/imprimirTokens.cpp
+       src/imprimirTokens.cpp \
+       src/commands/atribuicao.cpp \
+       src/commands/atribuicaoOperacao.cpp \
+       src/commands/escreva.cpp \
+       src/commands/escrevaOperacao.cpp
 
 # Regra principal: compila tudo e gera o executável
 $(TARGET): $(SRCS)

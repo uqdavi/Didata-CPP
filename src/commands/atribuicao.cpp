@@ -1,0 +1,18 @@
+#include "Interpretador.h"
+
+bool atribuicao(vector<string> tokens, map<string, double>& variaveis) {
+
+    // verifica se combina com o padrão "a <- 10"
+    if ( tokens.size() == 3 && tokens[1] == "<-" ) {
+        string nomeVariavel = tokens[0];
+        double valor = stod(tokens[2]);
+
+        variaveis[nomeVariavel] = valor;
+
+        cout << "Variavel '" << nomeVariavel << "' recebeu o valor " << valor << endl;
+        
+        return true;
+    }
+
+    return false;
+}

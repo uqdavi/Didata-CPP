@@ -25,7 +25,11 @@ int main(int argc, char* argv[]) {
     map<string, double> variaveis;
     string linha;
 
+    int numeroLinha = 0;
+
     while (getline(arquivo, linha)) {
+
+        numeroLinha++;
 
         vector<string> tokens = tokenizarLinha(linha);
 
@@ -33,7 +37,7 @@ int main(int argc, char* argv[]) {
             continue;
         }
 
-        executarLinha(tokens, variaveis);
+        executarLinha(tokens, variaveis, numeroLinha);
 
         // imprimirTokens(tokens);
     }
