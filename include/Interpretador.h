@@ -24,7 +24,7 @@ void imprimirTokens(vector<string> tokens);
 
 bool atribuicao(vector<string> tokens, map<string, double>& variaveis);
 bool atribuicaoOperacao(vector<string> tokens, map<string, double>& variaveis);
-bool escreva(vector<string> tokens, map<string, double>& variaveis);
+bool tentarExecutarEscreva(vector<string> tokens, map<string, double>& variaveis);
 bool escrevaOperacao(vector<string> tokens, map<string, double>& variaveis);
 
 #endif

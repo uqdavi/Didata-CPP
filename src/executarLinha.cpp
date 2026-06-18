@@ -6,7 +6,7 @@ void executarLinha(vector<string> tokens, map<string, double>& variaveis, int nu
 
     if ( atribuicaoOperacao(tokens, variaveis) ) return;
 
-    if ( escreva(tokens, variaveis) ) return;
+    if (tentarExecutarEscreva(tokens, variaveis)) return;
 
     if ( escrevaOperacao(tokens, variaveis) ) return;
 
