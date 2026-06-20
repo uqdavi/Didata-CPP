@@ -9,46 +9,90 @@ O **Didata** (https://github.com/uqdavi/Didata) é um projeto pessoal que eu ven
 Exemplo de entrada (`arquivo.txt`):
 
 ```
-a <- 10
-b <- 20
-escreva(a+b)
+x <- 10
+y <- 20
+
+se (x < y) entao
+    escreva(x)
+senao
+    escreva(y)
+fimse
 ```
 
 Saída:
 
 ```
-30
+10
 ```
 
 O desenvolvimento é feito de forma incremental, com cada etapa documentando os conceitos da disciplina aplicados ao longo do projeto.
 
-## Versão atual: v1.2.1
+## Versão atual: v1.3.0
 
 Atualmente, o Didata CPP já é capaz de interpretar:
 
 - Atribuição de variáveis: `a <- 10`
 - Atribuição com operações aritméticas (`+`, `-`, `*`, `/`): `c <- a + b`
-- Comando `escreva(...)`, tanto para variáveis (`escreva(a)`) quanto para expressões (`escreva(a+b)`)
+- Comando `escreva(...)`, tanto para variáveis (`escreva(a)`) quanto para expressões (`escreva(a+b)`) e valores literais (`escreva(100)`)
+- Condicional `se/senao se/senao/fimse` com suporte a operadores de comparação (`>`, `<`, `>=`, `<=`, `==`, `!=`)
 
 O histórico completo de versões — com o que foi adicionado e os conceitos aplicados em cada etapa — está disponível na aba [Releases](https://github.com/uqdavi/Didata-CPP/releases) do repositório.
+
+## Sintaxe suportada
+
+### Atribuição
+
+```
+x <- 10
+y <- x + 5
+```
+
+### Impressão
+
+```
+escreva(x)
+escreva(x + y)
+escreva(100)
+```
+
+### Condicional
+
+```
+se (x > y) entao
+    escreva(x)
+senao se (x == y) entao
+    escreva(0)
+senao
+    escreva(y)
+fimse
+```
 
 ## Estrutura do projeto
 
 ```
 Didata-CPP/
-├── src/                  ← módulos do interpretador
-│   ├── tokenizarLinha.cpp
-│   ├── separarTokens.cpp
-│   ├── resolverOperando.cpp
-│   ├── aplicarOperador.cpp
-│   ├── executarLinha.cpp
-│   └── imprimirTokens.cpp
-├── include/              ← cabeçalhos
-│   └── Interpretador.h
-├── main.cpp
-├── Makefile
-├── README.md
-└── .gitignore
+├── include/
+│   └── Interpretador.h              # Cabeçalho central — declara todas as funções
+├── src/
+│   ├── commands/                    # Implementações de cada comando da linguagem
+│   │   ├── atribuicao.cpp           # Comando: atribuição simples          (x <- 10)
+│   │   ├── atribuicaoOperacao.cpp   # Comando: atribuição com operação     (x <- a + b)
+│   │   ├── escreva.cpp              # Comando: impressão de valor           escreva(x)
+│   │   ├── escrevaOperacao.cpp      # Comando: impressão de expressão       escreva(a + b)
+│   │   └── se.cpp                   # Comando: condicional se/senao se/senao/fimse
+│   ├── aplicarOperador.cpp          # Aplica um operador aritmético (+, -, *, /)
+│   ├── avaliarCondicao.cpp          # Avalia uma condição booleana (>, <, >=, <=, ==, !=)
+│   ├── executarLinha.cpp            # Despacha tokens para o comando correto
+│   ├── imprimirTokens.cpp           # Utilitário de depuração — exibe tokens
+│   ├── resolverOperando.cpp         # Resolve operando (variável ou literal numérico)
+│   ├── separarTokens.cpp            # Subdivide tokens que contêm operadores colados
+│   └── tokenizarLinha.cpp           # Divide uma linha em tokens brutos
+├── main.cpp                         # Ponto de entrada — carrega e executa o arquivo
+├── main.exe                         # Executável compilado (Windows)
+├── test.txt                         # Arquivo de teste para o interpretador
+├── Makefile                         # Script de compilação automática
+├── README.md                        # Documentação geral do projeto
+└── .gitignore                       # Arquivos ignorados pelo Git
 ```
 
 ## Tecnologias
@@ -76,7 +120,7 @@ make clean
 
 ## Workflow de versionamento
 
-O projeto segue o fluxo de branches `main` (versões oficiais) e `develop` (desenvolvimento), método ensinado pelo professor Marlon na disciplina de Fundamentos da Computação. Cada nova versão é marcada com uma tag (ex: `v1.2.1`) e documentada na seção de Releases.
+O projeto segue o fluxo de branches `main` (versões oficiais) e `develop` (desenvolvimento), método ensinado pelo professor Marlon na disciplina de Fundamentos da Computação. Cada nova versão é marcada com uma tag (ex: `v1.3.0`) e documentada na seção de Releases.
 
 ## Status
 
