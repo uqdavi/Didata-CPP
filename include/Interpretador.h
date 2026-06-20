@@ -1,7 +1,6 @@
 #ifndef INTERPRETADOR_H
 #define INTERPRETADOR_H
 
-// Ja colocamos todos os includes aqui para nao precisar chamar em cada arquivo
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -24,7 +23,11 @@ void imprimirTokens(vector<string> tokens);
 
 bool atribuicao(vector<string> tokens, map<string, double>& variaveis);
 bool atribuicaoOperacao(vector<string> tokens, map<string, double>& variaveis);
-bool tentarExecutarEscreva(vector<string> tokens, map<string, double>& variaveis);
+bool escreva(vector<string> tokens, map<string, double>& variaveis);
 bool escrevaOperacao(vector<string> tokens, map<string, double>& variaveis);
+
+// Se Senao
+bool avaliarCondicao(const string& condicao, map<string, double>& variaveis);
+void se(const vector<string>& linhas, size_t& i, map<string, double>& variaveis);
 
 #endif
