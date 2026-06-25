@@ -1,6 +1,6 @@
 #include "Interpretador.h"
 
-bool atribuicaoOperacao(vector<string> tokens, map<string, double>& variaveis) {
+bool atribuicaoOperacao(vector<string> tokens, map<string, double>& variaveis, bool mostrarLogs) {
 
     if ( tokens.size() == 5 && tokens[1] == "<-" ) { // x <- 10 + 20
         string nomeVariavel = tokens[0]; // Nome no inicio [0]
@@ -12,7 +12,9 @@ bool atribuicaoOperacao(vector<string> tokens, map<string, double>& variaveis) {
         // Armazena a variavel na tabela de variaveis
         variaveis[nomeVariavel] = result;
 
-        cout << "Variavel '" << nomeVariavel << "' recebeu o valor " << result << endl;
+        if (mostrarLogs == true) {
+    cout << "Variavel '" << nomeVariavel << "' recebeu o valor " << result << endl;
+}
 
         return true;
     }

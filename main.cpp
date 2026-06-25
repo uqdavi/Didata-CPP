@@ -23,17 +23,36 @@ int main(int argc, char* argv[]) { // Como foi explicado em aula, é possível a
         return 0;
     }
 
-    map<string, double> variaveis; // Iremos armazenar as nossas variaveis nessa tabela, exemplo: [String nome da variavel]: [Double valor da variavel]
-    string linha; // Iremos armazenar uma linha por vez nessa variavel
-
+    map<string, double> variaveis;
+        string linha;
+       bool mostrarLogs = true;
+        int numeroLinha = 0;
     // -- [ ATUALIZAÇÃO ] --
     // Em versões passadas, era executada uma linha por vez
     // Agora, precisamos carregar e guardar todas as linhas pois iremos trabalhar com blocos de códigos por causa do SE & SENAO
     vector<string> linhas; // Entao todas as linhas estarao armazenadas aqui nesse vector
 
-    while ( getline(arquivo, linha) ) { 
-        linhas.push_back(linha); //Lendo todas as linhas 1 por vez e dando um push_back para armazenalas no vector
+   while (getline(arquivo, linha)) {
+
+    numeroLinha++;
+
+    if (numeroLinha == 1 && linha == "#sem-logs") {
+        mostrarLogs = false;
+        continue;
     }
+
+    vector<string> tokens = tokenizarLinha(linha);
+
+    if (tokens.empty()) {
+        continue;
+    }
+
+    executarLinha(tokens, variaveis, mostrarLogs);
+
+    if (mostrarLogs == true) {
+        imprimirTokens(tokens);
+    }
+}
 
     // Com todas linhas ja armazenadas, vamos executar linha por linha com esse laço de repetição.
     for (size_t i = 0; i < linhas.size(); i++) {
