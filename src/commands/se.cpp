@@ -1,6 +1,6 @@
 #include "Interpretador.h"
 
-void se(const vector<string>& linhas, size_t& i, map<string, double>& variaveis) {
+void se(const vector<string>& linhas, size_t& i, map<string, double>& variaveis, bool mostrarLogs) {
     // Aqui a gente usa um conceito interessante chamado "passagem por referencia"
     // Ao inves de criarmos copias das variaveis que sao passadas como argumentos na funcao
     // Usamos os valores reais delas usando o "&"
@@ -101,7 +101,7 @@ void se(const vector<string>& linhas, size_t& i, map<string, double>& variaveis)
         if (tokens.empty()) {
             continue;
         }
-        executarLinha(tokens, variaveis, j + 1);
+        executarLinha(tokens, variaveis, j + 1, mostrarLogs);
     }
 
 }

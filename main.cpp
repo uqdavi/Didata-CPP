@@ -16,43 +16,35 @@ int main(int argc, char* argv[]) { // Como foi explicado em aula, é possível a
         return 0;
     }
 
-    fstream arquivo(argv[1]); //Aqui definimos o arquivo.txt que iremos trabalhar
+    ifstream arquivo(argv[1]); //Aqui definimos o arquivo.txt que iremos trabalhar
 
     if (!arquivo.is_open()) { // Verificando se há algum erro ao abrir o arquivo.
         cout << "[ERROR] Erro ao abrir o arquivo " << argv[1] << endl;
-        return 0;
+        return 1; // Descobri que "return 1" significa que o código terminou com erro!
     }
 
-    map<string, double> variaveis;
-        string linha;
-       bool mostrarLogs = true;
-        int numeroLinha = 0;
+    // -- [ ATUALIZAÇÃO ] --
+    // Adicionado o #sem-logs ao projeto
+    bool mostrarLogs = true;
+
+    map<string, double> variaveis; // Iremos armazenar as nossas variaveis nessa tabela, exemplo: [String nome da variavel]: [Double valor da variavel]
+    string linha; // Iremos armazenar uma linha por vez nessa variavel
+
     // -- [ ATUALIZAÇÃO ] --
     // Em versões passadas, era executada uma linha por vez
     // Agora, precisamos carregar e guardar todas as linhas pois iremos trabalhar com blocos de códigos por causa do SE & SENAO
     vector<string> linhas; // Entao todas as linhas estarao armazenadas aqui nesse vector
 
-   while (getline(arquivo, linha)) {
+    while (getline(arquivo, linha)) {
 
-    numeroLinha++;
+        // Aqui verificamos se na primeira linha tem o #sem-logs
+        if (linha == "#sem-logs") {
+            mostrarLogs = false;
+            continue;
+        }
 
-    if (numeroLinha == 1 && linha == "#sem-logs") {
-        mostrarLogs = false;
-        continue;
+        linhas.push_back(linha); //Lendo todas as linhas 1 por vez e dando um push_back para armazenalas no vector
     }
-
-    vector<string> tokens = tokenizarLinha(linha);
-
-    if (tokens.empty()) {
-        continue;
-    }
-
-    executarLinha(tokens, variaveis, mostrarLogs);
-
-    if (mostrarLogs == true) {
-        imprimirTokens(tokens);
-    }
-}
 
     // Com todas linhas ja armazenadas, vamos executar linha por linha com esse laço de repetição.
     for (size_t i = 0; i < linhas.size(); i++) {
@@ -71,11 +63,11 @@ int main(int argc, char* argv[]) { // Como foi explicado em aula, é possível a
         // Antes, apenas usavamos o "executarLinha(tokens, variaveis, (int) i+1)" para executar uma linha por vez
         // Agora precisaremos trabalhar com blocos de codigos
         if( tokens[0] == "se" ) { // Caso a linha de codigo for uma condicional, iremos aplicar o algoritimo do SE e SENAO
-
-            se(linhas, i, variaveis);
+            se(linhas, i, variaveis, mostrarLogs);
 
         } else { // Caso contrario, apenas executamos uma linha por vez normalmente
-            executarLinha(tokens, variaveis, (int) i+1); 
+
+            executarLinha(tokens, variaveis, ((int) i+1), mostrarLogs); 
             // imprimirTokens(tokens);
         }
 

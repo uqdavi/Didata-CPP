@@ -12,9 +12,8 @@ bool atribuicaoOperacao(vector<string> tokens, map<string, double>& variaveis, b
         // Armazena a variavel na tabela de variaveis
         variaveis[nomeVariavel] = result;
 
-        if (mostrarLogs == true) {
-    cout << "Variavel '" << nomeVariavel << "' recebeu o valor " << result << endl;
-}
+        if (mostrarLogs == true) cout << "[LOGS] Variavel '" << nomeVariavel << "' recebeu o valor " << result << endl;
+    
 
         return true;
     }

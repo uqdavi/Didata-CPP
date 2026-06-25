@@ -10,9 +10,7 @@ bool atribuicao(vector<string> tokens, map<string, double>& variaveis, bool most
         // Aplica o valor na tabela
         variaveis[nomeVariavel] = valor;
 
-        if (mostrarLogs == true) {
-    cout << "Variavel '" << nomeVariavel << "' recebeu o valor " << valor << endl;
-}
+        if (mostrarLogs == true) cout << "[LOGS] Variavel '" << nomeVariavel << "' recebeu o valor " << valor << endl;
         
         return true;
     }
