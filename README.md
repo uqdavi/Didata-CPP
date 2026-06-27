@@ -127,11 +127,20 @@ Didata-CPP/
   - `<vector>` — armazenamento dinâmico dos tokens
   - `<map>` — tabela de variáveis (nome → valor)
 
+## Executar online
+
+Você pode rodar o projeto diretamente no navegador, sem precisar instalar nada, pelo Google Colab:
+
+🔗 [Abrir no Google Colab](https://colab.research.google.com/drive/1RDipd6OCLXt0Xl3iU7b1cDH5mm3IP_c6?usp=sharing)
+
 ## Como compilar e executar
 
 ```bash
-# Compilar
+# Compilar com Make
 make
+
+# Compilar manualmente com g++
+g++ main.cpp src/*.cpp src/commands/*.cpp -I include -o main.exe
 
 # Executar
 main programa.txt        # Windows
