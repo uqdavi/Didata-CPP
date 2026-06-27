@@ -65,6 +65,12 @@ int main(int argc, char* argv[]) { // Como foi explicado em aula, é possível a
         if( tokens[0] == "se" ) { // Caso a linha de codigo for uma condicional, iremos aplicar o algoritimo do SE e SENAO
             se(linhas, i, variaveis, mostrarLogs);
 
+        } else if (tokens[0] == "enquanto") { // === [ ATUALIZAÇÃO ] ===
+            // Com essa adição de leitura de blocos, me abriu algumas atualizações interessantes aqui para o nosso projeto
+            // Resolvi tentar fazer uma especie de while para pseudocodigo
+            // Entao basicamente irei utilizar os mesmos principios do SE SENAO
+            enquanto(linhas, i, variaveis, mostrarLogs); 
+        
         } else { // Caso contrario, apenas executamos uma linha por vez normalmente
 
             executarLinha(tokens, variaveis, ((int) i+1), mostrarLogs); 

@@ -20,7 +20,8 @@ SRCS = main.cpp \
        src/commands/atribuicaoOperacao.cpp \
        src/commands/escreva.cpp \
        src/commands/escrevaOperacao.cpp \
-       src/commands/se.cpp
+       src/commands/se.cpp \
+       src/commands/enquanto.cpp 
 
 # Regra principal: compila tudo e gera o executável
 $(TARGET): $(SRCS)

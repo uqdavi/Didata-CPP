@@ -30,4 +30,6 @@ bool escrevaOperacao(vector<string> tokens, map<string, double>& variaveis, bool
 bool avaliarCondicao(const string& condicao, map<string, double>& variaveis);
 void se(const vector<string>& linhas, size_t& i, map<string, double>& variaveis, bool mostrarLogs);
 
+void enquanto(const vector<string>& linhas, size_t& i, map<string, double>& variaveis, bool mostrarLogs);
+
 #endif
