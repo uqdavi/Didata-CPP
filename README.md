@@ -27,7 +27,7 @@ Saída:
 
 O desenvolvimento é feito de forma incremental, com cada etapa documentando os conceitos da disciplina aplicados ao longo do projeto.
 
-## Versão atual: v1.3.0
+## Versão atual: v1.4.0
 
 Atualmente, o Didata CPP já é capaz de interpretar:
 
@@ -35,8 +35,8 @@ Atualmente, o Didata CPP já é capaz de interpretar:
 - Atribuição com operações aritméticas (`+`, `-`, `*`, `/`): `c <- a + b`
 - Comando `escreva(...)`, tanto para variáveis (`escreva(a)`) quanto para expressões (`escreva(a+b)`) e valores literais (`escreva(100)`)
 - Condicional `se/senao se/senao/fimse` com suporte a operadores de comparação (`>`, `<`, `>=`, `<=`, `==`, `!=`)
-
-O histórico completo de versões — com o que foi adicionado e os conceitos aplicados em cada etapa — está disponível na aba [Releases](https://github.com/uqdavi/Didata-CPP/releases) do repositório.
+- Laço de repetição `enquanto/fimenquanto` com suporte às mesmas comparações do `se`
+- Flag `#sem-logs` no topo do arquivo para suprimir mensagens de log sem afetar a saída principal
 
 ## Sintaxe suportada
 
@@ -67,6 +67,28 @@ senao
 fimse
 ```
 
+### Laço de repetição
+
+```
+enquanto (x < 10) faca
+    escreva(x)
+    x <- x + 1
+fimenquanto
+```
+
+### Flag de logs
+
+Coloque `#sem-logs` na primeira linha do arquivo para desativar as mensagens de log:
+
+```
+#sem-logs
+x <- 1
+enquanto (x < 5) faca
+    escreva(x)
+    x <- x + 1
+fimenquanto
+```
+
 ## Estrutura do projeto
 
 ```
@@ -77,6 +99,7 @@ Didata-CPP/
 │   ├── commands/                    # Implementações de cada comando da linguagem
 │   │   ├── atribuicao.cpp           # Comando: atribuição simples          (x <- 10)
 │   │   ├── atribuicaoOperacao.cpp   # Comando: atribuição com operação     (x <- a + b)
+│   │   ├── enquanto.cpp             # Comando: loop de repetição     enquanto (x <= 10) faca ...
 │   │   ├── escreva.cpp              # Comando: impressão de valor           escreva(x)
 │   │   ├── escrevaOperacao.cpp      # Comando: impressão de expressão       escreva(a + b)
 │   │   └── se.cpp                   # Comando: condicional se/senao se/senao/fimse
